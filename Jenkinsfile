@@ -8,7 +8,6 @@ Pipeline{
         stage('git checkout') {
             steps { 
                 git url :' https://github.com/Swap1998-nam/DevSecOps-Cal-app' branch: 'main'
-
             }
         }
         stage('complile') {
