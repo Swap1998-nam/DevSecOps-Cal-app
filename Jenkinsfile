@@ -1,21 +1,21 @@
-Pipeline{
+pipeline {
     agent any
-    tools {
-        jdk 'java-21'
-        maven 'maven'
-    }
-    stages {
-        stage('git checkout') {
-            steps { 
-                git url :' https://github.com/Swap1998-nam/DevSecOps-Cal-app', branch: 'main'
-            }
-        }
-        stage('complile') {
-            steps {
-                sh 'mvn clean complile'
-            }
-        }
-    }
 
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/Swap1998-nam/DevSecOps-Cal-app'
+            }
+        }
+    }
+        stage('compile') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
 
 }
+
+
+
