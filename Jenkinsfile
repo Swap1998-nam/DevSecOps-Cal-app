@@ -12,6 +12,11 @@ pipeline {
                     url: 'https://github.com/Swap1998-nam/DevSecOps-Cal-app'
             }
         }
+        stage('validate') {
+            steps {
+                sh 'mvn clean validate'
+            }
+        }   
         stage('compile') {
             steps {
                 sh 'mvn clean compile'
@@ -22,11 +27,16 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
-        stage('Build') {
+        stage('Build/Package') {
             steps {
                 sh 'mvn clean package'
             }
         }
+        stage('verify') {
+            steps {
+                sh 'mvn clean verify'
+            }
+        }   
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
