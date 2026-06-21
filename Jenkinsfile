@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     tools {
         jdk 'java-21'
         maven 'maven'
@@ -12,31 +13,13 @@ pipeline {
                     url: 'https://github.com/Swap1998-nam/DevSecOps-Cal-app'
             }
         }
-        stage('validate') {
-            steps {
-                sh 'mvn clean validate'
-            }
-        }   
-        stage('compile') {
-            steps {
-                sh 'mvn clean compile'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
-        stage('Build/Package') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('verify') {
+
+        stage('Build & Verify') {
             steps {
                 sh 'mvn clean verify'
             }
-        }   
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
@@ -44,10 +27,5 @@ pipeline {
                 }
             }
         }
-        
-
     }
-
 }
-
-
